@@ -1,20 +1,25 @@
 import os
 import telebot
+import re
 
 TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 bot = telebot.TeleBot(TOKEN)
 
-FORBIDDEN_WORDS = ["казино", "спам", "реклама"]
+# Заборонені слова (буде ловити і великі і малі)
+FORBIDDEN_PATTERNS = [
+    r"\bреб_перу\b",
+    r"\bреб\b"
+]
 
 @bot.message_handler(func=lambda message: True)
 def filter_and_forward(message):
     if message.text:
         text = message.text.lower()
 
-        for word in FORBIDDEN_WORDS:
-            if word in text:
+        for pattern in FORBIDDEN_PATTERNS:
+            if re.search(pattern, text):
                 print("Заборонене слово знайдено")
                 return
 
