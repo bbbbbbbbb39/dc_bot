@@ -14,10 +14,10 @@ CHANNELS = [
 
 # Загальний список заборонених слів
 FORBIDDEN_PATTERNS = [
-    r"\bреб_перу\b",
-    r"\bреб\b",
-    r"\blima\b",
-    r"\bperu\b"
+    r"реб_перу",
+    r"реб",
+    r"lima",
+    r"peru"
 ]
 
 @bot.message_handler(func=lambda message: True)
